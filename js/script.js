@@ -1,4 +1,4 @@
-const guessedLetter = documen.querySelector(".guessed-letters");
+const guessedLetter = document.querySelector(".guessed-letters");
 /*The unordered list where the player’s guessed letters will appear*/
 const guessButton = document.querySelector(".guess");
 /*The button with the text “Guess!” in it.*/
