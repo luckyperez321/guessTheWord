@@ -40,13 +40,21 @@ guessButton.addEventListener("click", function (e) {
 
     const inputValue = guessForm.value;
     console.log(inputValue);
+   
+   /*was told this could be taken out for clean code and removes reduncancy
     guessForm.value = "";
     playerInput(inputValue);
+     (and that this could be added in after console log to clear form after each guess = guessForm.value = "";)
+    */
 
+     /* DEFINITELY NEED TO RE-REVIEW THIS WHOLE EVENTLISTENER FUNCTION*/
     const result = playerInput(inputValue);
     console.log(result);
+
+
+    
 });
-/*Feel like this whole guestButton function could be cleaned up and has extra stuff in it*/
+
 
 
 
@@ -55,37 +63,47 @@ guessButton.addEventListener("click", function (e) {
 /* Accept and Validate Player Guesses*/
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input.length === '') {
-        console.log("Lets Play! Enter a letter");
+    if (input.length === '' ) {                          /* this might have to be 0 instead of quotes*/
+        messageWall.innerText = "Lets Play! Enter a letter";        
     }
     else if (input.length > 1) {
-        console.log("Only one letter at a time, cowboy");
+        messageWall.innerText = "Only one letter at a time, cowboy";   
     }
     else if (!input.match(acceptedLetter)) {
         messageWall.innerText = "Please Enter A Letter From A-Z";
     }
     else {
-        return input();
+        return input;
     }
+
 };
 
-const makeGuess = function (guessButton) {
-    guessButton = guessButton.toUpperCase();
-    if (guessedLetters.includes(guessButton)) {
+const makeGuess = function (inputValue) {
+    inputValue = inputValue.toUpperCase();
+    if (guessedLetters.includes(inputValue)) {
         messageWall.innerText = "That Letter Has Already Been Guessed";
     }
     else {
-        guessedLetters.push(guessButton);
-
+        guessedLetters.push(inputValue);
+seenGuessedLetters();
         console.log(guessedLetters);
+
     }
 };
 
 /*
-What I had orginally for lines 67-68. The last else statement in the playerInput function
+What I had orginally for lines 82-83. The last else statement in the playerInput function
 else (input.match(/[a-zA-Z]/))
 {
 console.log ("Great One!")  
 */
 
+const seenGuessedLetters = function (){
+    guessedLetter.innerHTML = "";
+    for (const letter of guessedLetters){
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLetter.append(li);    
+    }
+};
 
