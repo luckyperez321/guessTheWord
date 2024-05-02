@@ -36,23 +36,12 @@ circles(word);
 guessButton.addEventListener("click", function (e) {
     e.preventDefault();
     messageWall.innerText = "";
-
-
     const inputValue = guessForm.value;
     console.log(inputValue);
-   
-   /*was told this could be taken out for clean code and removes reduncancy
+    makeGuess(inputValue);
     guessForm.value = "";
-    playerInput(inputValue);
-     (and that this could be added in after console log to clear form after each guess = guessForm.value = "";)
-    */
-
-     /* DEFINITELY NEED TO RE-REVIEW THIS WHOLE EVENTLISTENER FUNCTION*/
     const result = playerInput(inputValue);
     console.log(result);
-
-
-    
 });
 
 
