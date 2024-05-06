@@ -44,7 +44,7 @@ guessButton.addEventListener("click", function (e) {
 /* Accept and Validate Player Guesses*/
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input.length === '') {                          /* this might have to be 0 instead of quotes*/
+    if (input.length === 0) {                          /* this might have to be 0 instead of quotes*/
         messageWall.innerText = "Lets Play! Enter a letter";
     }
     else if (input.length > 1) {
@@ -70,9 +70,7 @@ const makeGuess = function (inputValue) {
         console.log(guessedLetters);
     }
     updateWordInProgress(guessedLetters);
-
 };
-
 
 
 const seenGuessedLetters = function () {
@@ -96,12 +94,14 @@ const updateWordInProgress = function (guessedLetters) {
             revealWord.push("●");
         }
     }
-};
-wordinProgress.innerText = revealWord.join("");
+
+
+wordInProgress.innerText = revealWord.join("");
 yesWon();
+};
 
 const yesWon = function (){
- if (word.toUpperCase ()=== wordinProgress.innerText){
+ if (word.toUpperCase ()=== wordInProgress.innerText){
     messageWall.classList.add("win");
     messageWall.innerHTML= `<p class= "highlight"> You got it right! Great job!</p>`;
  }
