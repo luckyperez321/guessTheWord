@@ -98,19 +98,12 @@ const updateWordInProgress = function (guessedLetters) {
     }
 };
 wordinProgress.innerText = revealWord.join("");
+yesWon();
 
-/*const wordArray = wordUpper.split("");
-console.log(wordArray);
-const revealWord = wordArray.map(letter => {
-    if (guessedLetters.includes(letter)){
-        return letter.toUppercase ();
-    }
-    else {
-        return "●" ;
-    }
-});
+const yesWon = function (){
+ if (word.toUpperCase ()=== wordinProgress.innerText){
+    messageWall.classList.add("win");
+    messageWall.innerHTML= `<p class= "highlight"> You got it right! Great job!</p>`;
+ }
 };
-inProgress.innerText = revealWord.join("");
-*/
-
 
