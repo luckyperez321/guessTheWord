@@ -26,11 +26,7 @@ const circles = function (word) {
     }
     inProgress.innerText = circleLetters.join("");
 };
-
 circles(word);
-
-
-
 
 
 guessButton.addEventListener("click", function (e) {
@@ -45,18 +41,14 @@ guessButton.addEventListener("click", function (e) {
 });
 
 
-
-
-
-
 /* Accept and Validate Player Guesses*/
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input.length === '' ) {                          /* this might have to be 0 instead of quotes*/
-        messageWall.innerText = "Lets Play! Enter a letter";        
+    if (input.length === '') {                          /* this might have to be 0 instead of quotes*/
+        messageWall.innerText = "Lets Play! Enter a letter";
     }
     else if (input.length > 1) {
-        messageWall.innerText = "Only one letter at a time, cowboy";   
+        messageWall.innerText = "Only one letter at a time, cowboy";
     }
     else if (!input.match(acceptedLetter)) {
         messageWall.innerText = "Please Enter A Letter From A-Z";
@@ -64,8 +56,8 @@ const playerInput = function (input) {
     else {
         return input;
     }
-
 };
+
 
 const makeGuess = function (inputValue) {
     inputValue = inputValue.toUpperCase();
@@ -74,25 +66,54 @@ const makeGuess = function (inputValue) {
     }
     else {
         guessedLetters.push(inputValue);
-seenGuessedLetters();
+        seenGuessedLetters();
         console.log(guessedLetters);
-
     }
+
+
+
+    updateWordInProgress(guessedLetters);
+
 };
 
-/*
-What I had orginally for lines 82-83. The last else statement in the playerInput function
-else (input.match(/[a-zA-Z]/))
-{
-console.log ("Great One!")  
-*/
 
-const seenGuessedLetters = function (){
+
+const seenGuessedLetters = function () {
     guessedLetter.innerHTML = "";
-    for (const letter of guessedLetters){
+    for (const letter of guessedLetters) {
         const li = document.createElement("li");
         li.innerText = letter;
-        guessedLetter.append(li);    
+        guessedLetter.append(li);
     }
 };
+
+const updateWordInProgress = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const revealWord = [];
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            revealWord.push(letter.toUpperCase());
+        }
+        else {
+            revealWord.push("●");
+        }
+    }
+};
+wordinProgress.innerText = revealWord.join("");
+
+/*const wordArray = wordUpper.split("");
+console.log(wordArray);
+const revealWord = wordArray.map(letter => {
+    if (guessedLetters.includes(letter)){
+        return letter.toUppercase ();
+    }
+    else {
+        return "●" ;
+    }
+});
+};
+inProgress.innerText = revealWord.join("");
+*/
+
 
