@@ -16,6 +16,8 @@ const playAgain = document.querySelector(".play-again");
 /*The hidden button that will appear prompting the player to play again.*/
 const word = "magnolia";
 const guessedLetters = [];
+const remainingGuesses = 8;
+
 
 
 const circles = function (word) {
@@ -44,7 +46,7 @@ guessButton.addEventListener("click", function (e) {
 /* Accept and Validate Player Guesses*/
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input.length === 0) {                          /* this might have to be 0 instead of quotes*/
+    if (input.length === 0) {                          
         messageWall.innerText = "Lets Play! Enter a letter";
     }
     else if (input.length > 1) {
@@ -95,10 +97,27 @@ const updateWordInProgress = function (guessedLetters) {
         }
     }
 
-
+wordInProgress
 inProgress.innerText = revealWord.join("");
 yesWon();
 };
+
+
+const guessesAllowed = function (guess){
+word.innerText = toUpperCase /*In the function, grab the word and make it uppercase. 
+Because the player’s guess is uppercase, making the word they’re guessing uppercase will 
+compare letters with the same casing. I ALREADY HAVE IT LIKE THIS I NEED TO LOOK TO SEE WHERE I SWITCHED IT
+BECAUSE THE GUESSING BOX SHOULD BE CAPITALIZED AT THIS POINT*/
+if ( word (guess)) {
+        messageWall.innerText = "You're on a Roll";
+    }
+    else if () {
+        messageWall.innerText = "Nada, You Have ${reaminingGuesses - 1} Guesses Left.";
+    }
+    else {
+        return input;
+};
+
 
 const yesWon = function (){
  if (word.toUpperCase ()=== inProgress.innerText){
@@ -106,4 +125,7 @@ const yesWon = function (){
     messageWall.innerHTML= `<p class= "highlight"> You got it right! Great job!</p>`;
  }
 };
+
+/* Letter box not clearing after each guess and it's allowing me to guess two letters. It should say something if i do that*/
+
 
