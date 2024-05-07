@@ -96,12 +96,12 @@ const updateWordInProgress = function (guessedLetters) {
     }
 
 
-wordInProgress.innerText = revealWord.join("");
+inProgress.innerText = revealWord.join("");
 yesWon();
 };
 
 const yesWon = function (){
- if (word.toUpperCase ()=== wordInProgress.innerText){
+ if (word.toUpperCase ()=== inProgress.innerText){
     messageWall.classList.add("win");
     messageWall.innerHTML= `<p class= "highlight"> You got it right! Great job!</p>`;
  }
