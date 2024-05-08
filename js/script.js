@@ -19,7 +19,6 @@ const guessedLetters = [];
 const remainingGuesses = 8;
 
 
-
 const circles = function (word) {
     const circleLetters = [];
     for (const letter of word) {
@@ -34,6 +33,8 @@ circles(word);
 guessButton.addEventListener("click", function (e) {
     e.preventDefault();
     messageWall.innerText = "";
+
+    /*this is fucked. check lines 30-39 in solution*/ 
     const inputValue = guessForm.value;
     console.log(inputValue);
     makeGuess(inputValue);
@@ -68,10 +69,11 @@ const makeGuess = function (inputValue) {
     }
     else {
         guessedLetters.push(inputValue);
-        seenGuessedLetters();
         console.log(guessedLetters);
+        seenGuessedLetters();
+        updateInProgress(guessedLetters);
     }
-    updateWordInProgress(guessedLetters);
+   
 };
 
 
@@ -84,7 +86,7 @@ const seenGuessedLetters = function () {
     }
 };
 
-const updateWordInProgress = function (guessedLetters) {
+const updateInProgress = function (guessedLetters) {
     const wordUpper = word.toUpperCase();
     const wordArray = wordUpper.split("");
     const revealWord = [];
@@ -96,26 +98,8 @@ const updateWordInProgress = function (guessedLetters) {
             revealWord.push("●");
         }
     }
-
-wordInProgress
 inProgress.innerText = revealWord.join("");
 yesWon();
-};
-
-
-const guessesAllowed = function (guess){
-word.innerText = toUpperCase /*In the function, grab the word and make it uppercase. 
-Because the player’s guess is uppercase, making the word they’re guessing uppercase will 
-compare letters with the same casing. I ALREADY HAVE IT LIKE THIS I NEED TO LOOK TO SEE WHERE I SWITCHED IT
-BECAUSE THE GUESSING BOX SHOULD BE CAPITALIZED AT THIS POINT*/
-if ( word (guess)) {
-        messageWall.innerText = "You're on a Roll";
-    }
-    else if () {
-        messageWall.innerText = "Nada, You Have ${reaminingGuesses - 1} Guesses Left.";
-    }
-    else {
-        return input;
 };
 
 
