@@ -33,14 +33,12 @@ circles(word);
 guessButton.addEventListener("click", function (e) {
     e.preventDefault();
     messageWall.innerText = "";
-
-    /*this is fucked. check lines 30-39 in solution*/ 
     const inputValue = guessForm.value;
-    console.log(inputValue);
-    makeGuess(inputValue);
-    guessForm.value = "";
     const result = playerInput(inputValue);
-    console.log(result);
+    if (result){
+        makeGuess(inputValue);
+    }
+    guessForm.value = "";
 });
 
 
