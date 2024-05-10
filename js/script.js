@@ -87,7 +87,6 @@ const makeGuess = function (inputValue) {
 };
 
 
-
 const seenGuessedLetters = function () {
     guessedLetter.innerHTML = "";
     for (const letter of guessedLetters) {
@@ -96,6 +95,7 @@ const seenGuessedLetters = function () {
         guessedLetter.append(li);
     }
 };
+
 
 const updateInProgress = function (guessedLetters) {
     const wordUpper = word.toUpperCase();
@@ -116,11 +116,11 @@ const updateInProgress = function (guessedLetters) {
 const updateGuessesRemaining = function (inputValue) {
     const upperWord = word.toUpperCase();
     if (!upperWord.includes(inputValue)) {
-        messageWall.innerText = `Unfortunately not, now you lost a turn`; //this might not work
+        messageWall.innerText = `Unfortunately no ${inputValue}, now you lost a turn`; 
         remainingGuesses -= 1;
     }
     else {
-        messageWall.innerText = `Yea! Nice Job!`; //again may need to add ${inputValue}
+        messageWall.innerText = `Yea! Nice job ${inputValue} is in there!`; 
     }
     if (remainingGuesses === 0) {
         messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
