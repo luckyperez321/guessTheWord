@@ -20,9 +20,9 @@ const remainingGuesses = 8;
 
 
 const getWord = async function (){
-const response = await fetch(“https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
 const words = await response.text();
-const wordArray = words.split("/n");
+const wordArray = words.split("\n");
 const randomIndex = Math.floor(Math.random()* wordArray.length);
 word = wordArray[randomIndex].trim();
 circles(word);
@@ -32,14 +32,14 @@ circles(word);
 getWord();
 
 const circles = function (word) {
-    const circleLetters = [];
+    const circlesLetters = [];
     for (const letter of word) {
         console.log(letter);
-        circleLetters.push("●");
+        circlesLetters.push("●");
     }
-    inProgress.innerText = circleLetters.join("");
+    inProgress.innerText = circlesLetters.join("");
 };
-circles(word);
+circles(word); // is this needed?
 
 
 guessButton.addEventListener("click", function (e) {
@@ -58,7 +58,7 @@ guessButton.addEventListener("click", function (e) {
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
     if (input.length === 0) {
-        messageWall.innerText = "Lets Play! Enter a letter";
+        messageWall.innerText = "Lets Play! Enter a letter";  //this isnt working
     }
     else if (input.length > 1) {
         messageWall.innerText = "Only one letter at a time, cowboy";
@@ -80,10 +80,10 @@ const makeGuess = function (inputValue) {
     else {
         guessedLetters.push(inputValue);
         console.log(guessedLetters);
+        updateGuessesRemaining(inputValue);
         seenGuessedLetters();
         updateInProgress(guessedLetters);
     }
-
 };
 
 
@@ -113,14 +113,14 @@ const updateInProgress = function (guessedLetters) {
     yesWon();
 };
 
-const updateGuessesRemaining = function (guess) {
+const updateGuessesRemaining = function (inputValue) {
     const upperWord = word.toUpperCase();
-    if (!upperWord.includes(guess)) {
+    if (!upperWord.includes(inputValue)) {
         messageWall.innerText = `Unfortunately not, now you lost a turn`; //this might not work
         remainingGuesses -= 1;
     }
     else {
-        messageWall.innerText = `Yea! Nice Job!`; //again may need to add ${guess}
+        messageWall.innerText = `Yea! Nice Job!`; //again may need to add ${inputValue}
     }
     if (remainingGuesses === 0) {
         messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
