@@ -19,6 +19,18 @@ const guessedLetters = [];
 const remainingGuesses = 8;
 
 
+const getWord = async function (){
+const response = await fetch(“https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+const words = await response.text();
+const wordArray = words.split("/n");
+const randomIndex = Math.floor(Math.random()* wordArray.length);
+word = wordArray[randomIndex].trim();
+circles(word);
+};
+
+
+getWord();
+
 const circles = function (word) {
     const circleLetters = [];
     for (const letter of word) {
@@ -35,7 +47,7 @@ guessButton.addEventListener("click", function (e) {
     messageWall.innerText = "";
     const inputValue = guessForm.value;
     const result = playerInput(inputValue);
-    if (result){
+    if (result) {
         makeGuess(inputValue);
     }
     guessForm.value = "";
@@ -45,7 +57,7 @@ guessButton.addEventListener("click", function (e) {
 /* Accept and Validate Player Guesses*/
 const playerInput = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
-    if (input.length === 0) {                          
+    if (input.length === 0) {
         messageWall.innerText = "Lets Play! Enter a letter";
     }
     else if (input.length > 1) {
@@ -71,8 +83,9 @@ const makeGuess = function (inputValue) {
         seenGuessedLetters();
         updateInProgress(guessedLetters);
     }
-   
+
 };
+
 
 
 const seenGuessedLetters = function () {
@@ -96,18 +109,38 @@ const updateInProgress = function (guessedLetters) {
             revealWord.push("●");
         }
     }
-inProgress.innerText = revealWord.join("");
-yesWon();
+    inProgress.innerText = revealWord.join("");
+    yesWon();
+};
+
+const updateGuessesRemaining = function (guess) {
+    const upperWord = word.toUpperCase();
+    if (!upperWord.includes(guess)) {
+        messageWall.innerText = `Unfortunately not, now you lost a turn`; //this might not work
+        remainingGuesses -= 1;
+    }
+    else {
+        messageWall.innerText = `Yea! Nice Job!`; //again may need to add ${guess}
+    }
+    if (remainingGuesses === 0) {
+        messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
+    }
+    else if (remainingGuesses === 1) {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+    }
+    else {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    }
 };
 
 
-const yesWon = function (){
- if (word.toUpperCase ()=== inProgress.innerText){
-    messageWall.classList.add("win");
-    messageWall.innerHTML= `<p class= "highlight"> You got it right! Great job!</p>`;
- }
+const yesWon = function () {
+    if (word.toUpperCase() === inProgress.innerText) {
+        messageWall.classList.add("win");
+        messageWall.innerHTML = `<p class= "highlight"> You got it right! Great job!</p>`;
+    }
 };
 
-/* Letter box not clearing after each guess and it's allowing me to guess two letters. It should say something if i do that*/
+
 
 
