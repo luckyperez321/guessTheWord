@@ -117,7 +117,7 @@ const updateGuessesRemaining = function (inputValue) {
     const upperWord = word.toUpperCase();
     if (!upperWord.includes(inputValue)) {
         messageWall.innerText = `Unfortunately no ${inputValue}, now you lost a turn`; 
-        remainingGuesses -= 1;
+        remainingGuesses =  -1;
     }
     else {
         messageWall.innerText = `Yea! Nice job ${inputValue} is in there!`; 
@@ -126,10 +126,10 @@ const updateGuessesRemaining = function (inputValue) {
         messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
     }
     else if (remainingGuesses === 1) {
-        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+        remainingSpan.innerText = `${remainingGuesses} guess`;
     }
     else {
-        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+        remainingSpan.innerText = `${remainingGuesses} guesses`;
     }
 };
 
