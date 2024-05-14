@@ -138,9 +138,32 @@ const yesWon = function () {
     if (word.toUpperCase() === inProgress.innerText) {
         messageWall.classList.add("win");
         messageWall.innerHTML = `<p class= "highlight"> You got it right! Great job!</p>`;
+        startOver();
     }
 };
 
 
+const startOver = function (){
+    guessButton.classList.add("hide");
+    remaining.classList.add("hide");
+    guessedLetter.classList.add("hide");
+    playAgain.classList.remove("hide");
+};
 
+
+
+playAgainButton.addEventListener("click", function(e){
+messageWall.classList.remove("win");
+guessedLetters = [];
+remainingGuesses = 8;
+remainignGuessesSpan.innerText = `${remainingGuesses} guesses`;
+guessedLetter.innerHTML = "";
+getWord();
+
+guessButton.classList.remove ("hide");
+playAgain.classList.add ("hide");
+remaining.classList.remove("hide");
+guessedLetter.classList.remove("hide");
+
+});
 
