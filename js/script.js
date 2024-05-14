@@ -14,18 +14,18 @@ const messageWall = document.querySelector(".message");
 /*The empty paragraph where messages will appear when the player guesses a letter.*/
 const playAgain = document.querySelector(".play-again");
 /*The hidden button that will appear prompting the player to play again.*/
-const word = "magnolia";
+let word = "magnolia";
 const guessedLetters = [];
-const remainingGuesses = 8;
+let remainingGuesses = 8;
 
 
-const getWord = async function (){
-const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
-const words = await response.text();
-const wordArray = words.split("\n");
-const randomIndex = Math.floor(Math.random()* wordArray.length);
-word = wordArray[randomIndex].trim();
-circles(word);
+const getWord = async function () {
+    const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+    const words = await response.text();
+    const wordArray = words.split("\n");
+    const randomIndex = Math.floor(Math.random() * wordArray.length);
+    word = wordArray[randomIndex].trim();
+    circles(word);
 };
 
 
@@ -39,7 +39,7 @@ const circles = function (word) {
     }
     inProgress.innerText = circlesLetters.join("");
 };
-circles(word); // is this needed?
+
 
 
 guessButton.addEventListener("click", function (e) {
@@ -116,20 +116,20 @@ const updateInProgress = function (guessedLetters) {
 const updateGuessesRemaining = function (inputValue) {
     const upperWord = word.toUpperCase();
     if (!upperWord.includes(inputValue)) {
-        messageWall.innerText = `Unfortunately no ${inputValue}, now you lost a turn`; 
-        remainingGuesses =  -1;
+        messageWall.innerText = `Unfortunately no ${inputValue}, now you lost a turn`;
+        remainingGuesses -= 1; //was remainingGuesses
     }
     else {
-        messageWall.innerText = `Yea! Nice job ${inputValue} is in there!`; 
+        messageWall.innerText = `Yea! Nice job ${inputValue} is in there!`;
     }
     if (remainingGuesses === 0) {
         messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
     }
     else if (remainingGuesses === 1) {
-        remainingSpan.innerText = `${remainingGuesses} guess`;
+        remainingDisplay.innerText = `${remainingGuesses} guess`; //was guessesRemainingSpan
     }
     else {
-        remainingSpan.innerText = `${remainingGuesses} guesses`;
+        remainingDisplay.innerText = `${remainingGuesses} guesses`; //was guessesRemainingSpan
     }
 };
 
