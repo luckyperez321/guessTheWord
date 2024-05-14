@@ -124,6 +124,7 @@ const updateGuessesRemaining = function (inputValue) {
     }
     if (remainingGuesses === 0) {
         messageWall.innerHTML = `Game over! The word was <span class = "highlight">${word}</span>`;
+        startOver();
     }
     else if (remainingGuesses === 1) {
         remainingDisplay.innerText = `${remainingGuesses} guess`; //was guessesRemainingSpan
