@@ -31,6 +31,7 @@ const getWord = async function () {
 
 getWord();
 
+
 const circles = function (word) {
     const circlesLetters = [];
     for (const letter of word) {
@@ -39,7 +40,6 @@ const circles = function (word) {
     }
     inProgress.innerText = circlesLetters.join("");
 };
-
 
 
 guessButton.addEventListener("click", function (e) {
@@ -113,11 +113,12 @@ const updateInProgress = function (guessedLetters) {
     yesWon();
 };
 
+
 const updateGuessesRemaining = function (inputValue) {
     const upperWord = word.toUpperCase();
     if (!upperWord.includes(inputValue)) {
         messageWall.innerText = `Unfortunately no ${inputValue}, now you lost a turn`;
-        remainingGuesses -= 1; 
+        remainingGuesses -= 1;
     }
     else {
         messageWall.innerText = `Yea! Nice job ${inputValue} is in there!`;
@@ -144,7 +145,7 @@ const yesWon = function () {
 };
 
 
-const startOver = function (){
+const startOver = function () {
     guessButton.classList.add("hide");
     remaining.classList.add("hide");
     guessedLetter.classList.add("hide");
@@ -152,20 +153,19 @@ const startOver = function (){
 };
 
 
+playAgain.addEventListener("click", function () {
+    messageWall.classList.remove("win");
+    guessedLetters = [];
+    remainingGuesses = 8;
+    remainingDisplay.innerText = `${remainingGuesses} guesses`;
+    guessedLetter.innerHTML = "";
+    messageWall.innerText = "";
+    getWord();
 
-playAgain.addEventListener("click", function(){
-messageWall.classList.remove("win");
-guessedLetters = [];
-remainingGuesses = 8;
-remainingDisplay.innerText = `${remainingGuesses} guesses`;
-guessedLetter.innerHTML = "";
-messageWall.innerText = "";
-getWord();
 
-guessButton.classList.remove ("hide");
-playAgain.classList.add ("hide");
-remaining.classList.remove("hide");
-guessedLetter.classList.remove("hide");
-
+    guessButton.classList.remove("hide");
+    playAgain.classList.add("hide");
+    remaining.classList.remove("hide");
+    guessedLetter.classList.remove("hide");
 });
 
