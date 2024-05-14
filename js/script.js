@@ -15,7 +15,7 @@ const messageWall = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 /*The hidden button that will appear prompting the player to play again.*/
 let word = "magnolia";
-const guessedLetters = [];
+let guessedLetters = [];
 let remainingGuesses = 8;
 
 
@@ -153,12 +153,13 @@ const startOver = function (){
 
 
 
-playAgainButton.addEventListener("click", function(e){
+playAgain.addEventListener("click", function(){
 messageWall.classList.remove("win");
 guessedLetters = [];
 remainingGuesses = 8;
-remainignGuessesSpan.innerText = `${remainingGuesses} guesses`;
+remainingDisplay.innerText = `${remainingGuesses} guesses`;
 guessedLetter.innerHTML = "";
+messageWall.innerText = "";
 getWord();
 
 guessButton.classList.remove ("hide");
